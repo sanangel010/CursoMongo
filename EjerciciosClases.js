@@ -165,6 +165,23 @@ db.invetario.aggregate([{$project:{"items":{$concatArrays:["$etiquetas","$cantid
 
 // COND  $cond  condicional if/else dentro de la agregacion.
 
+// si hay muchos productos se agrega un descuento si no uno mas pequeno.
+db.productos.aggregate([{$project:{"item":1,"descuento":{$cond:{if:{$gte:["$cantidad",150]},then:30,else:15}}}}])
+db.productos.aggregate([{$project:{"item":1,"cantidad":1,"descuento":{$cond:{if:{$gte:["$cantidad",150]},then:30,else:15}}}}])
+
+
+//DATETOPARTS  conversion de fechas
+db.ventas.aggregate([{$project:{"fecha":{$dateToParts:{date:"$fecha"}},fechaISO:{$dateToParts:{date:"$fecha",iso8601:true}},"fechaTimeZone":}}])
+
+
+
+
+
+
+
+
+
+
 
 
 
