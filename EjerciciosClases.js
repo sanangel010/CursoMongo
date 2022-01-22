@@ -141,3 +141,32 @@ db.personajes.find({$nor:[{"nombre":"Bruce"},{"puesto":"agente"},{"edad":28}]}).
 
 // busqueda con type
 db.personajes.find({"edad":{$type:"string"}})
+
+
+
+
+// EJERCICIOS QUE SE DEBEN PASAR
+
+// $addToSet -- devueklve un arreglo de todos lo valorers unicos que resultan de aplicar una expresion a cada documento
+
+// group
+db.ventas.find()
+
+// se agrupan por fechas, el addToSet genera un arreglo con los diferentes campos agrupados.
+db.ventas.aggregate([{$group:{"_id":{"dia":{$dayOfYear:"$fecha"},"anio":{$year:"$fecha"}},"itemsVentas":{$addToset:"item"}}}])
+
+
+//CONCAT  $concat  concatena xcadenas en una sola
+db.personajes.aggregate([{$project:{"descripcion":{$concat:["$nombre", " ", "$apellido", " puesto:","$puesto"]}}}])
+
+// CONCAT ARRAY concatena arreglos en uno solo
+db.invetario.aggregate([{$project:{"items":{$concatArrays:["$etiquetas","$cantidad"]}}}])
+
+
+// COND  $cond  condicional if/else dentro de la agregacion.
+
+
+
+
+
+
